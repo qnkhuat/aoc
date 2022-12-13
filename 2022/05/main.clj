@@ -3,15 +3,21 @@
 
 (def stacks
   (map #(map char (str/upper-case %))
-       ["hrbdzfls"
-        "tbmzr"
-        "zlchns"
-        "scfj"
-        "pghwrzb"
-        "vjzgdnmt"
-        "glnwfzpq"
-        "mzr"
-        "mclgvrt"]))
+       ["HRBDZFLS"
+        "TBMZR"
+        "ZLCHNS"
+        "SCFJ"
+        "PGHWRZB"
+        "VJZGDNMT"
+        "GLNWFSPQ"
+        "MZR"
+        "MCLGVRT"]))
+
+#_(def stacks
+    (map #(map char (str/upper-case %))
+         ["zn"
+          "mcd"
+          "p"]))
 
 (defn parse-move-line
   [line]
@@ -27,23 +33,47 @@
        str/split-lines
        (drop 10)))
 
+(defn assoc-seq
+  "inline replacement"
+  [s i v]
+  (map-indexed (fn [j x] (if (= i j) v x)) s))
+
 (def moves (map parse-move-line move-lines))
 
-(defn do-move
-  [stacks [amount from to]]
-  (let [from-stack (nth from stacks)
-        to-stack   (nth to stacks)
-        stack (->> (nth from stacks)
-                   (take amount)
-                   reverse)]
-    (-> (assoc-seq stack from ()))))
+#_(def moves [[1 2 1] [ 3 1 3 ] [ 2 2 1 ] [ 1 1 2]])
 
-(take 3 (range 10))
+(defn do-move-1
+  [stacks [amount from to :as move]]
+  (let [from       (dec from)
+        to         (dec to)
+        from-stack (nth stacks from from)
+        to-stack   (nth stacks to)
+        new-stack  (->> from-stack
+                        (take-last amount)
+                        reverse
+                        (concat to-stack))]
+    (-> (assoc-seq stacks from (drop-last amount from-stack))
+        (assoc-seq to new-stack))))
 
-(update)
+;; part 1
+(->> (reduce do-move-1 stacks moves)
+     (map last)
+     str/join)
+;; => "RNZLFZSJH"
 
-(defn move
-  [stack moves])
+(defn do-move-2
+  [stacks [amount from to :as move]]
+  (let [from       (dec from)
+        to         (dec to)
+        from-stack (nth stacks from from)
+        to-stack   (nth stacks to)
+        new-stack  (->> from-stack
+                        (take-last amount)
+                        (concat to-stack))]
+    (-> (assoc-seq stacks from (drop-last amount from-stack))
+        (assoc-seq to new-stack))))
 
-(defn assoc-seq [s i v]
-  (map-indexed (fn [j x] (if (= i j) v x)) s))
+(->> (reduce do-move-2 stacks moves)
+     (map last)
+     str/join)
+;; => "CNSFCGJSM"
