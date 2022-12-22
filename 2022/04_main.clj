@@ -15,7 +15,7 @@
 
 ;; part 1
 
-(->> (slurp "input.txt")
+(->> (slurp "04_input.txt")
      str/split-lines
      (map parse-line)
      (filter is-inclusive?)
@@ -29,7 +29,7 @@
       (and (<= s1 s2) (>= e1 s2))
       (and (>= s1 s2 )(>= e2 s1))))
 
-(->> (slurp "input.txt")
+(->> (slurp "04_input.txt")
      str/split-lines
      (map parse-line)
      (filter overlap?)

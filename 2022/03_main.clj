@@ -14,7 +14,7 @@
      (+ 27 (- o 65)))))
 
 ;; part 1
-(->> (slurp "input.txt")
+(->> (slurp "03_input.txt")
      str/split-lines
      (map #(partition (/ (count %) 2) %))
      (map #(map set %))
@@ -25,7 +25,7 @@
 ;; => 7701
 
 ;; part 2
-(->> (slurp "input.txt")
+(->> (slurp "03_input.txt")
      str/split-lines
      (map set)
      (partition 3)

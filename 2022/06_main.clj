@@ -10,7 +10,7 @@
               (reduced [new-stack (inc cnt)])
               [new-stack (inc cnt)])))
         [[] 0]
-        (apply list (slurp "input.txt")))
+        (apply list (slurp "06_input.txt")))
 ;; => [[\j \q \v \g] 1794]
 
 (defn fifo-fourteen-el
@@ -25,5 +25,5 @@
               (reduced [new-stack (inc cnt)])
               [new-stack (inc cnt)])))
         [[] 0]
-        (apply list (slurp "input.txt")))
+        (apply list (slurp "06_input.txt")))
 ;; => [[\p \r \h \v \l \g \f \t \c \b \n \w \j \q] 2851]

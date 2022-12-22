@@ -1,6 +1,6 @@
 (require '[clojure.string :as str])
 
-(def input (str/split-lines (slurp "input.txt")))
+(def input (str/split-lines (slurp "07_input.txt")))
 
 (defn cd
   [pwd dir]

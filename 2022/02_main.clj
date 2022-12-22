@@ -45,7 +45,7 @@
   [turn]
   (+ (score? turn) (play->score (second turn))))
 
-(def input (->> (slurp "input.txt")
+(def input (->> (slurp "02_input.txt")
                 str/split-lines
                 (map #(str/split % #" "))))
 

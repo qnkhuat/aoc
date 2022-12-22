@@ -29,7 +29,7 @@
     (map #(Integer/parseInt %) l)))
 
 (def move-lines
-  (->> (slurp "input.txt")
+  (->> (slurp "05_input.txt")
        str/split-lines
        (drop 10)))
 

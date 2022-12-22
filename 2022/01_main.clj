@@ -4,7 +4,7 @@
   (reduce + 0 coll))
 
 (def descending-calories-sum
-  (as-> (slurp "input.txt") input
+  (as-> (slurp "01_input.txt") input
     (str/split input #"\n\n")
     (map str/split-lines input)
     (map (fn [xs] (map #(Integer/parseInt %) xs)) input)
